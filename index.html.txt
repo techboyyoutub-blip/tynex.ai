@@ -4,71 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My AI</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-      margin: 0;
-      padding: 30px;
-    }
-    .box {
-      max-width: 700px;
-      margin: auto;
-      background: #111827;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    }
-    input {
-      width: 75%;
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-    }
-    button {
-      padding: 12px 18px;
-      border: none;
-      border-radius: 8px;
-      background: #22c55e;
-      color: white;
-      cursor: pointer;
-    }
-    #reply {
-      margin-top: 20px;
-      padding: 15px;
-      background: #1f2937;
-      border-radius: 10px;
-      min-height: 50px;
-      white-space: pre-wrap;
-    }
-  </style>
 </head>
 <body>
-  <div class="box">
-    <h1>My AI Chat</h1>
-    <input id="msg" placeholder="Type your message here">
-    <button onclick="sendMsg()">Send</button>
-    <div id="reply"></div>
-  </div>
+  <h1>My AI Chat</h1>
+  <input id="msg" placeholder="Type your message here">
+  <button onclick="sendMsg()">Send</button>
+  <div id="reply" style="margin-top:20px;"></div>
 
   <script>
     async function sendMsg() {
       const message = document.getElementById("msg").value;
-      const replyBox = document.getElementById("reply");
-      replyBox.innerText = "Thinking...";
+      document.getElementById("reply").innerText = "Thinking...";
 
       const res = await fetch("/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify({ message })
       });
 
       const data = await res.json();
-      replyBox.innerText = data.reply;
+      document.getElementById("reply").innerText = data.reply;
     }
   </script>
 </body>

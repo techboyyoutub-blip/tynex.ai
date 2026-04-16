@@ -22,7 +22,6 @@ def home():
 @app.post("/chat")
 def chat(data: dict):
     message = data["message"]
-
     response = requests.post(
         "http://localhost:11434/api/chat",
         json={
@@ -32,6 +31,5 @@ def chat(data: dict):
         },
         timeout=120
     )
-
     result = response.json()
     return {"reply": result["message"]["content"]}
